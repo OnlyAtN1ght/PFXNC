@@ -11,6 +11,7 @@ services:
     networks:
       internalGame:
         ipv4_address: 192.168.2.1
+    tty: true
          
   client:
     build:
@@ -20,12 +21,10 @@ services:
       internalGame:
         ipv4_address: 192.168.2.2
     stdin_open: true
-    tty: true
     
 networks:
   internalGame:
-    driver: bridge
     ipam:
+      driver : default
       config:
         -  subnet: 192.168.2.0/24
-           gateway: 192.168.2.254
