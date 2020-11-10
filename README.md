@@ -6,4 +6,4 @@ for the course of Virtualization
 
 __Intructions :__
 
-Just run `docker-compose up` in the root folder and enjoy !
+Just run `docker-compose up --build` in the root folder and enjoy !
