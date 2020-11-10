@@ -8,10 +8,10 @@
 
 def combat(a,b):
   if a == b:
-    return 0
+    return "0"
   elif (a == 1 and b == 2) or (a == 2 and b == 3) or (a == 3 and b == 1): #B win
     return "b"
   elif (a == 1 and b == 3) or (a == 2 and b == 1) or (a == 3 and b == 2): #A win
     return "a"
   else:
-    return -1
+    return "-1"
