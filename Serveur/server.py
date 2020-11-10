@@ -33,42 +33,44 @@ def main():
 	sock.listen(1)
 
 	while True:
-	    # Wait for a connection
-	    print(sys.stderr, 'waiting for a connection')
-	    connection, client_address = sock.accept()
-	    try:
-	    	# La connection est faites 
-	        print(sys.stderr, 'connection from', client_address)
+		# Wait for a connection
+		print(sys.stderr, 'waiting for a connection')
+		connection, client_address = sock.accept()
+		try:
+			# La connection est faites 
+			print(sys.stderr, 'connection from', client_address)
 
-	        while True:
-	        	# On recoit des données
-	            jeu_client = connection.recv(16)
+			while True:
+				# On recoit des données
+				jeu_client = connection.recv(16)
 
-	            print(sys.stderr, 'received data : {data}'.format(data))
+				#print(sys.stderr, 'received data : {}'.format(jeu_client.decode()))
 
-	            if jeu_client:
-	            	# Dans le cas où on recoit une valeur de jeu du client
+				if jeu_client:
+					# Dans le cas où on recoit une valeur de jeu du client
 
-	            	# On demande au joueur serveur son jeu
-	            	jeu = demande_jeu()
+					# On demande au joueur serveur son jeu
+					jeu = input("Jeu : ")
 
-	            	# On verifie qui gagne 
-	            	resultat = combat(jeu,jeu_client)
+					# On verifie qui gagne
+					resultat = combat(int(jeu),int(jeu_client.decode()))
 
-	            	# Serveur gagne
-	            	affiche_resultat(resultat)
+					# Affiche le resultat
+					affiche_resultat(resultat)
 
+					resultat = str(resultat)
 
-	                print(sys.stderr, 'sending data back to the client')
-	                #clientSocket.sendto(message.encode(),("localhost", serverPort))
-	                connection.sendall(resultat)
-	            else:
-	                print(sys.stderr, 'no more data from', client_address)
-	                break
-	            
-	    finally:
-	        # Clean up the connection
-	        connection.close()
+					#print(sys.stderr, 'sending data back to the client : {}'.format(resultat.encode()))
+					#clientSocket.sendto(message.encode(),("localhost", serverPort))
+					connection.send(resultat.encode())
+				else:
+					#print(sys.stderr, 'no more data from', client_address)
+					break
+		except:
+			connection.close()
+		finally:
+			# Clean up the connection
+			connection.close()
 
 if __name__ == '__main__':
 	main()

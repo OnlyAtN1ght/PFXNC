@@ -29,20 +29,15 @@ def main():
 	sock.connect(server_address)
 	try:
 		# On demande le jeu du client
-		jeu_client = demande_jeu()
-		print(sys.stderr, 'sending  : {}'.format(message))
+		jeu_client = input("Jeu : ")
+		#print(sys.stderr, 'sending  : {}'.format(jeu_client))
 
 		# On envoie le jeu au serveur
-		sock.sendall(message.encode())
+		sock.sendall(jeu_client.encode())
 
 		# On attend la reponse du serveur
-		data = sock.recv(16)
-		while True:
-			data = sock.recv(16)
-			# On a recu la reponse du serveur
-			if data:
-				print(sys.stderr, 'received {}'.format(data))
-				affiche_resultat_client()
+		msg = sock.recv(1024)
+		affiche_resultat(int(msg.decode()))
 				
 	finally:
 		print(sys.stderr, 'closing socket')
