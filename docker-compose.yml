@@ -1,20 +1,31 @@
 version: "3"
+
 services:
-  client:
-    build:
-      context: .
-      dockerfile: ./client/Dockerfile
-    ports:
-      - "10000:10000"
-    networks:
-      - internalGame
-    stdin_open: true
-    tty: true
+
   server:
     build:
       context: .
       dockerfile: ./serveur/Dockerfile
+    ports:
+      - "10000:10000"
     networks:
-      - internalGame     
+      internalGame:
+        ipv4_address: 192.168.2.1
+         
+  client:
+    build:
+      context: .
+      dockerfile: ./client/Dockerfile
+    networks:
+      internalGame:
+        ipv4_address: 192.168.2.2
+    stdin_open: true
+    tty: true
+    
 networks:
   internalGame:
+    driver: bridge
+    ipam:
+      config:
+        -  subnet: 192.168.2.0/24
+           gateway: 192.168.2.254

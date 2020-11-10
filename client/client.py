@@ -8,6 +8,7 @@
 
 import socket
 import sys
+from time import sleep
 
 def affiche_resultat(resultat):
 	if resultat == 2:
@@ -20,11 +21,12 @@ def affiche_resultat(resultat):
 		print("An error occur...")
 
 def main():
+	sleep(5) #Waiting to wakeup server
 	# Create a TCP/IP socket
 	sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 	# Connect the socket to the port where the server is listening
-	server_address = ('172.17.0.1', 10000)
+	server_address = ('192.168.2.1', 10000)
 	print(sys.stderr, 'connecting to %s port %s' % server_address)
 	sock.connect(server_address)
 	try:
