@@ -1,0 +1,10 @@
+Files : 
+
+-server.py (Gere la connexion)
+-client.py (fais presque rien)
+-calcule.py (fait les calculs du jeu)
+
+Communication : module socket
+
+
+
