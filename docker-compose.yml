@@ -9,22 +9,23 @@ services:
     ports:
       - "10000:10000"
     networks:
-      internalGame:
+      default:
         ipv4_address: 192.168.2.1
-    tty: true
          
   client:
     build:
       context: .
       dockerfile: ./client/Dockerfile
     networks:
-      internalGame:
+      default:
         ipv4_address: 192.168.2.2
     stdin_open: true
+    tty: true
     
 networks:
-  internalGame:
+  default:
     ipam:
       driver : default
       config:
         -  subnet: 192.168.2.0/24
+           gateway: 192.168.2.254
