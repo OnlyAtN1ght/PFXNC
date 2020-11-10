@@ -1,0 +1,23 @@
+version: "3"
+services:
+
+  Client:
+    build:
+      context:
+      dockerfile: ./Client/Dockerfile
+    ports:
+      - "10000:10000"
+    networks:
+      - internalGame
+    stdin_open: true
+    tty: true
+
+  Server:
+    build:
+      context: .
+      dockerfile: ./Serveur/Dockerfile
+    networks:
+      - internalGame
+      
+networks:
+  internalGame:
