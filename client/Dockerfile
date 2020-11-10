@@ -2,5 +2,5 @@
 FROM python:3.7.9-slim
 
 WORKDIR /client
-COPY . .
+COPY ./client/. .
 CMD ["python3", "client.py"]
