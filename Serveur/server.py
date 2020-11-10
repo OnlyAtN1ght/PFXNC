@@ -1,8 +1,25 @@
+#Docker-compose project by Lilian Cizeron and Simon Provot
+#1st Year of Cybersécurité du Logiciel at ENSIBS
+
+#Translation of a and b :
+#1 : stone
+#2 : leaf
+#3 : scissors
+
+
 import socket
 import sys
 from calcul import combat
 
-
+def affiche_resultat(resultat):
+	if resultat == 1:
+		print("You won !")
+	elif resultat == 2:
+		print("You loose...")
+	elif resultat == 0:
+		print("The other player did the same thing, try again !")
+	elif resultat == -1:
+		print("An error occur...")
 
 def main():
 	# Create a TCP/IP socket
@@ -42,7 +59,7 @@ def main():
 	            	resultat = combat(jeu,jeu_client)
 
 	            	# Serveur gagne
-	            	affiche_resultat_serveur()
+	            	affiche_resultat(resultat)
 
 
 
