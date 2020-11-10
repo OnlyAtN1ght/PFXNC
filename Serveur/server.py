@@ -45,7 +45,6 @@ def main():
 	            	affiche_resultat_serveur()
 
 
-
 	                print(sys.stderr, 'sending data back to the client')
 	                #clientSocket.sendto(message.encode(),("localhost", serverPort))
 	                connection.sendall(resultat)
@@ -56,3 +55,6 @@ def main():
 	    finally:
 	        # Clean up the connection
 	        connection.close()
+
+if __name__ == '__main__':
+	main()
