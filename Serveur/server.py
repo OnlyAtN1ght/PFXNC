@@ -32,9 +32,6 @@ def main():
 
 	sock.listen(1)
 
-
-
-
 	while True:
 	    # Wait for a connection
 	    print(sys.stderr, 'waiting for a connection')
@@ -62,7 +59,6 @@ def main():
 	            	affiche_resultat(resultat)
 
 
-
 	                print(sys.stderr, 'sending data back to the client')
 	                #clientSocket.sendto(message.encode(),("localhost", serverPort))
 	                connection.sendall(resultat)
@@ -73,3 +69,6 @@ def main():
 	    finally:
 	        # Clean up the connection
 	        connection.close()
+
+if __name__ == '__main__':
+	main()
