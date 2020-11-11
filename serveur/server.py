@@ -52,7 +52,7 @@ def main():
 
 					# Le serveur joue et le dit au client
 					jeu = str(randint(1,3))
-					connection.send("Server played " + jeu.encode())
+					#connection.send(jeu.encode())
 
 					# On verifie qui gagne
 					resultat = combat(int(jeu),int(jeu_client.decode()))

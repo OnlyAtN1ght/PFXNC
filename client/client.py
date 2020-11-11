@@ -48,8 +48,8 @@ def main():
 		sock.sendall(jeu_client.encode())
 
 		# On attend la reponse du serveur
-		msg = sock.recv(1024)
-		print(msg.decode())
+		#msg = sock.recv(1024)
+		#print(msg.decode())
 		msg = sock.recv(1024)
 		affiche_resultat(int(msg.decode()))
 				
