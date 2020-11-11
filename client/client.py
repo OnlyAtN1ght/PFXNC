@@ -10,6 +10,14 @@ import socket
 import sys
 from time import sleep
 
+def jeu():
+	print("You have three choices for this game :")
+	print("1 : stone")
+	print("2 : leaf")
+	print("3 : scissors")
+	choice = input("You choice ? ")
+	return str(choice)
+
 def affiche_resultat(resultat):
 	if resultat == 2:
 		print("You won !")
@@ -21,6 +29,7 @@ def affiche_resultat(resultat):
 		print("An error occur...")
 
 def main():
+	print("Welcome in our game of stone - leaf scissors !")
 	sleep(5) #Waiting to wakeup server
 	# Create a TCP/IP socket
 	sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -31,7 +40,7 @@ def main():
 	sock.connect(server_address)
 	try:
 		# On demande le jeu du client
-		jeu_client = input("Jeu : ")
+		jeu_client = jeu()
 		#print(sys.stderr, 'sending  : {}'.format(jeu_client))
 
 		# On envoie le jeu au serveur
