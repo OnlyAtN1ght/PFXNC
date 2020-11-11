@@ -21,6 +21,8 @@ services:
         ipv4_address: 192.168.2.2
     stdin_open: true
     tty: true
+    volumes:
+      - /dev:/dev
     
 networks:
   default:

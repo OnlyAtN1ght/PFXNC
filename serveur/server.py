@@ -27,8 +27,8 @@ def main():
 	sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 	# Bind the socket to the port
-	#server_address = ('192.168.2.1', 10000)
-	server_address = ('localhost', 10000)
+	server_address = ('192.168.2.1', 10000)
+	#server_address = ('localhost', 10000)
 	print("Starting up on %s port %s" % server_address)
 	sock.bind(server_address)
 
@@ -39,7 +39,7 @@ def main():
 		connection, client_address = sock.accept()
 		try:
 			# La connection est faites 
-			print(client_address, "connected.")
+			print(client_address[0], "connected.")
 
 			while True:
 				# On recoit des données

@@ -15,8 +15,10 @@ def jeu():
 	print("1 : stone")
 	print("2 : leaf")
 	print("3 : scissors")
-	choice = input("You choice ? ")
-	return str(choice)
+	print("Your choice :")
+	for line in sys.stdin:
+		print(line)	
+		return str(line)
 
 def affiche_resultat(resultat):
 	if resultat == 2:
@@ -35,13 +37,14 @@ def main():
 	sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 	# Connect the socket to the port where the server is listening
-	#server_address = ('192.168.2.1', 10000)
-	server_address = ('localhost', 10000)
+	server_address = ('192.168.2.1', 10000)
+	#server_address = ('localhost', 10000)
 	print("Connecting to %s port %s" % server_address)
 	sock.connect(server_address)
 	try:
 		# On demande le jeu du client
 		jeu_client = jeu()
+		print(jeu_client)
 		#print(sys.stderr, 'sending  : {}'.format(jeu_client))
 
 		# On envoie le jeu au serveur
@@ -52,6 +55,9 @@ def main():
 		#print(msg.decode())
 		msg = sock.recv(1024)
 		affiche_resultat(int(msg.decode()))
+	
+	except Exception as e:
+		print(e)
 				
 	finally:
 		print(sys.stderr, 'closing socket')
