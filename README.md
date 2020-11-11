@@ -11,3 +11,7 @@ Just run `docker-compose up --build` in the root folder and enjoy !
 __Explanation :__
 
 You have two container that choose a random item between stone, leaf or scissors and make a battle !
+
+__GitHub :__
+
+https://github.com/OnlyAtN1ght/PFXNC
