@@ -29,18 +29,17 @@ def main():
 	# Bind the socket to the port
 	#server_address = ('192.168.2.1', 10000)
 	server_address = ('localhost', 10000)
-	print(sys.stderr, 'starting up on %s port %s' % server_address)
+	print("Starting up on %s port %s" % server_address)
 	sock.bind(server_address)
-
-	sock.listen(1)
 
 	while True:
 		# Wait for a connection
-		print(sys.stderr, 'waiting for a connection')
+		print("Waiting for a connection")
+		sock.listen(5)
 		connection, client_address = sock.accept()
 		try:
 			# La connection est faites 
-			print(sys.stderr, 'connection from', client_address)
+			print(client_address, "connected.")
 
 			while True:
 				# On recoit des données
