@@ -9,30 +9,22 @@
 import socket
 import sys
 from time import sleep
-
-def jeu():
-	print("You have three choices for this game :")
-	print("1 : stone")
-	print("2 : leaf")
-	print("3 : scissors")
-	print("Your choice :")
-	for line in sys.stdin:
-		print(line)	
-		return str(line)
+from random import randint
 
 def affiche_resultat(resultat):
 	if resultat == 2:
-		print("You won !")
+		print("Client won !")
 	elif resultat == 1:
-		print("You loose...")
+		print("Client loose...")
 	elif resultat == 0:
 		print("The other player did the same thing, try again !")
 	elif resultat == -1:
 		print("An error occur...")
 
 def main():
+	possibility = {"1": "stone", "2": "leaf", "3": "scissors"}
 	print("Welcome in our game of stone - leaf - scissors !")
-	sleep(5) #Waiting to wakeup server
+	sleep(2) #Waiting to wakeup server
 	# Create a TCP/IP socket
 	sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
@@ -43,16 +35,14 @@ def main():
 	sock.connect(server_address)
 	try:
 		# On demande le jeu du client
-		jeu_client = jeu()
-		print(jeu_client)
-		#print(sys.stderr, 'sending  : {}'.format(jeu_client))
+		jeu_client = str(randint(1, 3))
+		print("Client has played :", possibility[jeu_client])
 
 		# On envoie le jeu au serveur
 		sock.sendall(jeu_client.encode())
 
 		# On attend la reponse du serveur
-		#msg = sock.recv(1024)
-		#print(msg.decode())
+
 		msg = sock.recv(1024)
 		affiche_resultat(int(msg.decode()))
 	
@@ -60,7 +50,6 @@ def main():
 		print(e)
 				
 	finally:
-		print(sys.stderr, 'closing socket')
 		sock.close()
 
 if __name__ == '__main__':
