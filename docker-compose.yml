@@ -1,7 +1,11 @@
+#Docker-compose project by Lilian Cizeron and Simon Provot
+#1st Year of Cybersécurité du Logiciel at ENSIBS
+
 version: "3"
 
 services:
-
+  
+  #Server part
   server:
     build:
       context: .
@@ -12,7 +16,8 @@ services:
       default:
         ipv4_address: 192.168.2.1
     tty: true
-         
+  
+  #Client part
   client:
     build:
       context: .
@@ -21,6 +26,7 @@ services:
       default:
         ipv4_address: 192.168.2.2
     
+#Network to use for connection
 networks:
   default:
     ipam:

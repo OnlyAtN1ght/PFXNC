@@ -6,7 +6,7 @@
 #2 : leaf
 #3 : scissors
 
-
+#Libraries
 import socket
 import sys
 from calcul import combat
@@ -14,62 +14,63 @@ from random import randint
 
 def affiche_resultat(resultat):
 	if resultat == 1:
-		print("Server won !")
+		print("Server won !\n")
 	elif resultat == 2:
-		print("Server loose...")
+		print("Server loose...\n")
 	elif resultat == 0:
-		print("The other player did the same thing, try again !")
+		print("The other player did the same thing, try again !\n")
 	elif resultat == -1:
-		print("An error occur...")
+		print("An error occur...\n")
 
 def main():
 
+	#Dictionnary to translate
 	possibility = {"1": "stone", "2": "leaf", "3": "scissors"}
 	
-	# Create a TCP/IP socket
+	#Create a TCP/IP socket
 	sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-	# Bind the socket to the port
+	#Bind the socket to the port
 	server_address = ('192.168.2.1', 10000)
-	#server_address = ('localhost', 10000)
-	print("Starting up on %s port %s" % server_address)
+	print("\nStarting up on %s port %s" % server_address)
 	sock.bind(server_address)
 
-	
-	# Wait for a connection
+	#Wait for a connection
 	print("Waiting for a connection")
 	sock.listen(5)
 	connection, client_address = sock.accept()
+	
 	try:
-		# La connection est faites 
+		#Connection done 
 		print(client_address[0], "connected.")
 
 		while True:
-			# On recoit des données
+		
+			#Receving client data
 			jeu_client = connection.recv(16)
-			#print(sys.stderr, 'received data : {}'.format(jeu_client.decode()))
+
 			if jeu_client:
-				# Dans le cas où on recoit une valeur de jeu du client
-
-				# Le serveur joue et le dit au client
+			
+				#The server play
 				jeu = str(randint(1,3))
-				print("Server has played :", possibility[jeu])
+				print("\nServer has played :", possibility[jeu])
 
-				# On verifie qui gagne
+				#Check who won
 				resultat = combat(int(jeu),int(jeu_client.decode()))
 
-				# Affiche le resultat
+				#Print result
 				affiche_resultat(resultat)
-
+				
+				#Sending result
 				resultat = str(resultat)
-
 				connection.send(resultat.encode())
 			else:
 				break
 	except:
+		#Clean up the connection
 		connection.close()
 	finally:
-		# Clean up the connection
+		#Clean up the connection
 		connection.close()
 
 if __name__ == '__main__':
