@@ -10,6 +10,7 @@
 import socket
 import sys
 from calcul import combat
+from random import randint
 
 def affiche_resultat(resultat):
 	if resultat == 1:
@@ -26,7 +27,8 @@ def main():
 	sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 	# Bind the socket to the port
-	server_address = ('192.168.2.1', 10000)
+	#server_address = ('192.168.2.1', 10000)
+	server_address = ('localhost', 10000)
 	print(sys.stderr, 'starting up on %s port %s' % server_address)
 	sock.bind(server_address)
 
@@ -49,8 +51,9 @@ def main():
 				if jeu_client:
 					# Dans le cas où on recoit une valeur de jeu du client
 
-					# On demande au joueur serveur son jeu
-					jeu = input("Jeu : ")
+					# Le serveur joue et le dit au client
+					jeu = str(randint(1,3))
+					connection.send("Server played " + jeu.encode())
 
 					# On verifie qui gagne
 					resultat = combat(int(jeu),int(jeu_client.decode()))

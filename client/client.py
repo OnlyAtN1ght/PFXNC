@@ -29,13 +29,14 @@ def affiche_resultat(resultat):
 		print("An error occur...")
 
 def main():
-	print("Welcome in our game of stone - leaf scissors !")
+	print("Welcome in our game of stone - leaf - scissors !")
 	sleep(5) #Waiting to wakeup server
 	# Create a TCP/IP socket
 	sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 	# Connect the socket to the port where the server is listening
-	server_address = ('192.168.2.1', 10000)
+	#server_address = ('192.168.2.1', 10000)
+	server_address = ('localhost', 10000)
 	print(sys.stderr, 'connecting to %s port %s' % server_address)
 	sock.connect(server_address)
 	try:
@@ -47,6 +48,8 @@ def main():
 		sock.sendall(jeu_client.encode())
 
 		# On attend la reponse du serveur
+		msg = sock.recv(1024)
+		print(msg.decode())
 		msg = sock.recv(1024)
 		affiche_resultat(int(msg.decode()))
 				
